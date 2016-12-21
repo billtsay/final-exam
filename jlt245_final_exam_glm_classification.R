@@ -2,10 +2,9 @@
 setwd("~/final-exam")
 
 # Import the data
-loan_csv <- "jlt245_final_exam_occupancy_dataset.csv"
+ocp_csv <- "jlt245_final_exam_occupancy_dataset.csv"
 
-loan_data <- read.csv(loan_csv)
-class(loan_data)
+ocp_data <- read.csv(ocp_csv)
 
 require(caTools)
 set.seed(101)
@@ -31,7 +30,7 @@ n_df <- length(families)
 # quasibinomial	(link = "logit")
 # quasipoisson	(link = "log")
 
-data <- loan_data
+data <- ocp_data
 
 for (i in 1:n_rep) {
   sample = sample.split(data$Occupancy, SplitRatio = v_sratio)

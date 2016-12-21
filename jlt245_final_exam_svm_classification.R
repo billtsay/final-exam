@@ -4,10 +4,9 @@ library(e1071)
 
 
 # Import the data
-loan_csv <- "jlt245_final_exam_occupancy_dataset.csv"
+ocp_csv <- "jlt245_final_exam_occupancy_dataset.csv"
 
-loan_data <- read.csv(loan_csv)
-class(loan_data)
+ocp_data <- read.csv(ocp_csv)
 
 require(caTools)
 set.seed(101)
@@ -20,7 +19,7 @@ kernels <- c("linear", "polynomial", "radial", "sigmoid")
 
 n_df <- length(kernels)
 
-data <- loan_data
+data <- ocp_data
 
 for (i in 1:n_rep) {
   sample = sample.split(data$Occupancy, SplitRatio = v_sratio)
@@ -57,10 +56,10 @@ av_var <- rowMeans(variance)
 # Plot MSE values for each family type.
 dat <- cbind(av_mse, av_te, av_bias_p2, av_var)
 m_dat <- as.matrix(t(dat))
-
 colnames(m_dat) <- kernels
+m_dat
 
-barplot(m_dat, xlab= "Family", beside=TRUE, col=rainbow(4), log="y")
+barplot(m_dat, xlab= "Kernel", beside=TRUE, col=rainbow(4), log="y")
 legend("topleft", c("Training MSE","Test MSE","Bias^2","Variance"), cex=1, bty="n", fill=rainbow(4))
 
 
